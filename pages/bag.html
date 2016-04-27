@@ -1,0 +1,51 @@
+<main>
+
+
+  <div class="row-fluid col-md-12">
+    <h1>Welcome to The Reevoo Supermarket</h1>
+    <div class="col-md-4" ng-repeat="item in products">
+      <div class="thumbnail">
+        <div class="img-container">
+          <img src="../images/optimised/{{item.image}}.jpg" alt="{{item.title}}">
+        </div>
+        <div class="caption">
+          <h3>{{item.title}}</h3>
+          <p>{{item.description}}</p>
+          <p>{{ item.price | currency:'£' }}</p>
+          <p>
+            <select ng-model="item.qty" ng-options="quant for quant in quantity"></select>
+          </p>
+          <button class="btn-primary" ng-click="addItem(item);">Add</button>
+          </p>
+        </div> 
+      </div>
+    </div>
+  </div>
+
+  <div class="row-fluid col-md-8 col-md-offset-2 shopping-bag" ng-show="cart.length> 0">
+    <h2>Your Shopping Bag</h2>
+     
+    <table class="table col-md-7">
+      <tr>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Qty</th>
+        <th>Subtotal</th>
+        <th>Action</th>
+      </tr>
+      <tr ng-repeat="item in cart">
+        <td>{{ item.title }}</td>
+        <td>{{ item.price | currency:'£' }}</td>
+        <td>{{item.qty}}</td>
+        <td>{{subTotal(item) | currency :'£'}}</td>
+        <td>[<a href ng-click="removeItem($index)">X</a>]</td>
+      </tr>
+      <tr>
+        <td colspan="3"><strong>Total</strong></td>
+        <td class="bold"><strong>{{total() | currency :'£'}}</strong></td>
+      </tr>
+    </table>
+  </div>
+
+
+</main>
